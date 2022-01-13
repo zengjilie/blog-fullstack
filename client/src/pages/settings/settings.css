@@ -1,0 +1,118 @@
+.settings{
+    display: flex;
+}
+
+.settingsWrapper{
+    margin-top: 80px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settingsTitle{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.settingsUpdateTitle{
+    font-size: 2rem;
+}
+.settingsDeleteTitle{
+    font-size: 1rem;
+    color: red;
+    cursor: pointer;
+    background-color: white;
+    padding:10px 20px;
+    border-radius: 9999px;
+    border: 1px solid red;
+} 
+.settingsDeleteTitle:hover, .settingsDeleteTitle:active{
+    color:white;
+    background-color: red;
+}
+
+.settingsForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.settingsProfile{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.settingsImg{
+    width:50px;
+    height: 50px;
+    object-fit:cover;
+    border-radius: 9999px;
+}
+
+.settingsUploadImage{
+    color:gray;
+    border-radius: 9999px;
+    border:1px solid gray;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.settingsUploadImage:hover{
+    background-color:rgb(232, 232, 232);
+    border-color: none;
+}
+.settingsProfile{
+    margin-bottom: 20px;
+}
+
+.settingsForm > label{
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.settingsForm > input{
+    color:gray;
+    margin:10px 0;
+    height: 30px;
+    border:none;
+    border-bottom: 1px solid lightgray;
+}
+.settingsForm > input:focus{
+    outline:none;
+}
+
+.settingsSubmit{
+    width:150px;
+    height:50px;
+    border: none;
+    border-radius: 10px;
+    color:white;
+    font-size: 1.2rem;
+    font-family: serif;
+    background-color: orange;
+    border-radius: 9999px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width:650px){
+    .settingsWrapper{
+        max-width:300px;
+    }
+   .settingsUpdateTitle{
+       font-size: 1.5rem;
+   } 
+   .settingsDeleteTitle{
+        font-size: 12px;
+        padding:8px      
+   }
+   .settingsUploadImage{
+       font-size: 12px;
+       padding:8px
+   }
+   .settingsSubmit{
+       font-size: 1.1rem;
+       width: 100px;
+       height:40px;
+   }
+}

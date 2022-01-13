@@ -1,0 +1,143 @@
+.top{
+    height: 50px;
+    padding:15px;
+    background-color: white;
+    position: sticky;
+    top:0;
+    display: flex;
+    align-items: center;
+    font-family: 'Josefin Sans', sans-serif;
+    border-bottom: 1px solid lightgray;
+    z-index: 999;
+}
+
+
+.topLeft, .topRight{
+    flex:3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:3;
+}
+.topLogo{
+    font-family: serif;
+    font-size: 2rem;
+}
+.topIcon{
+    font-size: 20px;
+    margin-right: 10px;
+    color: #444;
+    cursor: pointer;
+}
+
+.topImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.topCenter{
+    flex:6;
+    display:flex;
+    justify-content: center;
+    z-index:1;
+}
+
+.topList{
+    display: flex;
+    justify-content: center;
+    list-style: none;    
+    padding-inline-start:0;
+}
+
+.topListItem{
+    margin-right: 40px;
+    color:gray;
+    font-style: 18px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.topListItem:hover{
+    color:black
+}
+
+.topMenuWrapper{
+    z-index:3;
+}
+.topMenu{
+    display:none;
+    margin-left: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.topSearchIcon{
+    font-style: 18px;
+    color: #666;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+#check{
+    display: none;
+}
+
+@media only screen and ( max-width:670px){
+    .top{
+        padding-top:10px;
+        padding-bottom:10px;
+        justify-content: start;
+    }
+    .backgroundBloker{
+        position:absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height:100%;
+        background-color: white;
+        z-index:2;
+    }
+    .topLeft{
+        display:none
+    }
+
+    .topCenter{
+        justify-content: start;
+    }
+
+    .topList{
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 10px;
+        position:fixed;
+        left:0;
+        top:-60%;
+        width: 100%;
+        background-color:#fafafa;
+        transition: all .5s;
+    }
+
+    .topListItem{
+        margin-top:10px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .topRight{
+        justify-content:end;
+    }
+    .topSearchIcon{
+        display:none
+    }
+    .topMenu{
+        display:block;
+    }
+    #check:checked ~ * .topList{
+        top:70px;
+    }
+    #login{
+        display:none
+    }
+}
