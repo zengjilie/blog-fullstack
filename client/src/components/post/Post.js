@@ -1,35 +1,47 @@
 import './post.css'
+import { Link } from 'react-router-dom';
 
-function Post() {
+function Post({ post }) {
+    console.log(post);
     return (
         <div className='post'>
-            <div className='imgWrapper'>
-                <img
-                    className='postImg'
-                    src="https://images.pexels.com/photos/7651006/pexels-photo-7651006.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                    alt="" />
-            </div>
+            <Link to={`/post/${post._id}`}>
+                <div className='imgWrapper'>
+                    {post?.photo ?
+                        <img
+                            className='postImg'
+                            src={post?.photo}
+                            alt="" /> :
+                        <img
+                            className='postImg'
+                            src="https://images.pexels.com/photos/7651006/pexels-photo-7651006.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                            alt="" />
+                    }
+                </div>
+            </Link>
 
             <div className="postInfo">
 
                 <div className='postInfoLineOne'>
-                    <span className="postTitle">
-                        Lorem ipsum dolor sit
-                    </span>
-
+                    <Link className="postTitle" to={`/post/${post._id}`}>
+                        <span >
+                            {post?.title}
+                        </span>
+                    </Link>
                     <div className="postCats">
-                        <span className="postCat">Music</span>
-                        <span className="postCat">Life</span>
+                        {post?.categories.map((cat, index) =>
+                            <span key={index} className="postCat">{cat}</span>
+                        )}
                     </div>
                 </div>
 
                 <hr />
 
                 <p className="postDes">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, blanditiis? Harum quae, molestias, perferendis ex mollitia ipsam repudiandae obcaecati quas officiis atque consectetur architecto veritatis tempore, recusandae cupiditate aspernatur perspiciatis!
+                    {post?.desc}
                 </p>
 
-                <span className="postDate">1 hour ago</span>
+                <span className="postDate">{new Date(post?.createdAt).toDateString()}</span>
             </div>
 
         </div>

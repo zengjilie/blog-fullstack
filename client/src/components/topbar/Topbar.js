@@ -7,7 +7,7 @@ function Topbar() {
         <div className="top">
             <div className="topLeft">
                 <Link to="/" style={{ color: "black", textDecoration: "none" }}>
-                    <span className='topLogo'>Alex's Blog</span>
+                    <span className='topLogo'>BLOG-XYZ</span>
                 </Link>
             </div>
 
@@ -20,25 +20,26 @@ function Topbar() {
 
             <div className="topCenter">
                 <ul className="topList">
-                    <Link className="topListItem" to="/" style={{ color: "black", textDecoration: "none" }}>
+                    <Link className="topListItem link" to="/">
                         <li >HOME</li>
                     </Link>
 
-                    <Link className="topListItem" to="/about" style={{ color: "black", textDecoration: "none" }}>
+                    <Link className="topListItem link" to="/about" >
                         <li >ABOUT</li>
                     </Link>
-                    <Link className="topListItem" to="/write" style={{ color: "black", textDecoration: "none" }}>
+
+                    <Link className="topListItem link" to="/write" >
                         <li >WRITE</li>
                     </Link>
 
+                    <Link className='topListItem link' to="/login">
+                        <li >LOGIN</li>
+                    </Link>
                 </ul>
 
             </div>
 
             <div className="topRight">
-                <Link to="/login" style={{ color: "black", textDecoration: "none" }}>
-                    <span id="login" style={{ marginLeft: "12px" }} className="topListItem">LOGIN</span>
-                </Link>
                 <Link to="/settings">
                     <img
                         className="topImg"
