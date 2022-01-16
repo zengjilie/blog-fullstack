@@ -27,6 +27,13 @@ export default function reducer(state, action) {
                 isFetching: false,
                 error: true
             };
+
+        case 'LOGIN_OUT':
+            return{
+                user:null,
+                isFetching:false,
+                error:false,
+            }
         default:
             return {
                 state

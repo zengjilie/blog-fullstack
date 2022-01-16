@@ -1,8 +1,10 @@
 import './topbar.css';
 import { Link } from 'react-router-dom';
-
+import { MenuIcon } from '@heroicons/react/solid';
+import { useContext } from 'react';
+import { userContext } from '../../context/Context';
 function Topbar() {
-
+    const { user, dispatch } = useContext(userContext);
     return (
         <div className="top">
             <div className="topLeft">
@@ -12,10 +14,7 @@ function Topbar() {
             </div>
 
             <input type="checkbox" id="check" />
-            <label className="topMenuWrapper" htmlFor="check">
-                <i
-                    className="topMenu fas fa-bars">
-                </i>
+            <label className="topMenuWrapper" htmlFor="check"> <MenuIcon className='topMenu' style={{ height: "40px", width: "40px" }} />
             </label>
 
             <div className="topCenter">
@@ -32,19 +31,30 @@ function Topbar() {
                         <li >WRITE</li>
                     </Link>
 
-                    <Link className='topListItem link' to="/login">
-                        <li >LOGIN</li>
-                    </Link>
+                    {user ?
+                        <Link className='topListItem link' to="/" onClick={()=>dispatch({type:'LOGIN_OUT'})}>
+                            <li >LOGOUT</li>
+                        </Link> :
+                        <Link className='topListItem link' to="/login">
+                            <li >LOGIN</li>
+                        </Link>
+                    }
                 </ul>
 
             </div>
 
             <div className="topRight">
                 <Link to="/settings">
-                    <img
-                        className="topImg"
-                        src="https://images.pexels.com/photos/830829/pexels-photo-830829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                        alt="" />
+                    {user?.profilePic ?
+                        <img
+                            className="topImg"
+                            src={user.profilePic}
+                            alt="" /> :
+                        <img
+                            className="topImg"
+                            src="/images/profile.jpeg"
+                            alt="" /> 
+                    }
                 </Link>
             </div>
             <div className='backgroundBloker'></div>

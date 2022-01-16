@@ -53,7 +53,7 @@
 }
 
 .topListItem{
-    margin-right: 40px;
+    margin:0 20px;
     color:gray;
     font-style: 18px;
     font-weight: 400;
@@ -68,8 +68,6 @@
 }
 .topMenu{
     display:none;
-    margin-left: 20px;
-    font-size: 30px;
     cursor: pointer;
 }
 

@@ -5,6 +5,8 @@ import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
 import Login from "./pages/login/Login";
 import Register from './pages/register/Register'
+import {useContext} from 'react';
+import {userContext} from './context/Context';
 
 import {
   BrowserRouter,
@@ -13,6 +15,8 @@ import {
 } from 'react-router-dom'
 
 function App() {
+  const {user} = useContext(userContext);
+  console.log(user);
   return (
     <BrowserRouter>
       <div className="App">

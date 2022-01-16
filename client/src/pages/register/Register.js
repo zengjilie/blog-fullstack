@@ -18,7 +18,7 @@ function Login() {
                 email: email,
                 password: password,
             })
-            res.data && navigate('/');
+            res.data && navigate('/login');
         } catch (err) {
             console.log(err);
             setErr(true);

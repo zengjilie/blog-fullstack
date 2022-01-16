@@ -53,6 +53,10 @@
     font-family: serif;
     cursor: pointer;
 }
+.loginSubmit:disabled{
+    cursor:not-allowed;
+    background-color: gray;
+}
 .loginRegister{
     border:none;
     background-color: white;

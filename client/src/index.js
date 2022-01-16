@@ -5,8 +5,9 @@ import UserContextProvider from './context/Context'
 
 ReactDOM.render(
   <React.StrictMode>
-
-    <App />
+    <UserContextProvider>
+      <App />
+    </UserContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
