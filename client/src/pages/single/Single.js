@@ -6,7 +6,6 @@ function single() {
     return (
         <div className='single'>
             <SinglePost/>
-            <Sidebar/>
         </div>
     )
 }

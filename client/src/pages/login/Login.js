@@ -15,7 +15,7 @@ function Login() {
         //manually dispatch, without importing actions, probably not the best way.
         dispatch({ type: 'LOGIN_START' });
         try {
-            const res = await axios.post('/auth/login', {
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/auth/login', {
                 username,
                 password,
             });

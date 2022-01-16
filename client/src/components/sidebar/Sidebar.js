@@ -9,7 +9,7 @@ function Sidebar() {
     useEffect(() => {
         const fetch = async () => {
             //fetch all categories
-            const response = await axios.get('/categories');
+            const response = await axios.get(process.env.REACT_APP_API_URL+'/categories');
             setCategories(response.data);
         }
         fetch();
@@ -41,10 +41,7 @@ function Sidebar() {
             <div className="sidebarItem">
                 <span className="sidebarTitle">FOLLOW US</span>
                 <div className="sidebarSocial">
-                    <i className="sidebarIcon fab fa-facebook-square"></i>
-                    <i className="sidebarIcon fab fa-twitter-square"></i>
-                    <i className="sidebarIcon fab fa-pinterest-square"></i>
-                    <i className="sidebarIcon fab fa-dribbble-square"></i>
+
                 </div>
             </div>
 

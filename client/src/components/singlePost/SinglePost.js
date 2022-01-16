@@ -7,24 +7,25 @@ import { Link } from 'react-router-dom';
 
 function SinglePost() {
     //get postid
+    const [post, setPost] = useState(null);
+    console.log(post);
+
     let postId = useParams().postId;
     useEffect(() => {
         const fetchPost = async () => {
-            const response = await axios.get(`/posts/${postId}`);
+            const response = await axios.get(process.env.REACT_APP_API_URL + `/posts/${postId}`);
             setPost(response.data);
         }
         fetchPost();
     }, [])
 
-    const [post, setPost] = useState(null);
-    console.log(post);
     return (
         <div className='singlePost'>
             <div className="singlePostWrapper">
                 {post?.photo ?
                     <img
                         className='singlePostImg'
-                        src={post?.photo}
+                        src={process.env.REACT_APP_API_URL + post?.photo}
                         alt=""
                     /> :
                     <img

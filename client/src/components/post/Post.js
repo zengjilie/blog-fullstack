@@ -2,20 +2,22 @@ import './post.css'
 import { Link } from 'react-router-dom';
 
 function Post({ post }) {
-    console.log(post);
+    console.log(process.env.REACT_APP_API_IMAGE + `/${post?.photo}`)
+    fetch(process.env.REACT_APP_API_IMAGE + `/${post?.photo}`)
+        .then((res)=>console.log(res))
     return (
         <div className='post'>
             <Link to={`/post/${post._id}`}>
                 <div className='imgWrapper'>
-                    {post?.photo ?
+                    {post?.photo ?  
                         <img
                             className='postImg'
-                            src={post?.photo}
+                            src={process.env.REACT_APP_API_IMAGE + `/${post?.photo}`}
                             alt="" /> :
                         <img
                             className='postImg'
                             src="https://images.pexels.com/photos/7651006/pexels-photo-7651006.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                            alt="" />
+                            alt=""/>
                     }
                 </div>
             </Link>

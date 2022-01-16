@@ -17,6 +17,7 @@ import {
 function App() {
   const {user} = useContext(userContext);
   console.log(user);
+  
   return (
     <BrowserRouter>
       <div className="App">

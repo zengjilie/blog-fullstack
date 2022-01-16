@@ -13,7 +13,7 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const res = await axios.post('/auth/register', {
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/auth/register', {
                 username: username,
                 email: email,
                 password: password,
@@ -55,7 +55,7 @@ function Login() {
                     className='registerSubmit'
                 >Register</button>
             </form>
-            {err && <h3 style={{marginTop:'20px', color:'red'}}>Please try another username!</h3>}
+            {err && <h3 style={{ marginTop: '20px', color: 'red' }}>Please try another username!</h3>}
         </div>
     )
 }
