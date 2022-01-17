@@ -5,18 +5,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: 
-    linear-gradient(
-        rgb(255,255,255, 0.5),
-        rgb(255,255,255, 0.5)
-    ),
-        url("https://images.pexels.com/photos/7326717/pexels-photo-7326717.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-    background-size: cover;    
-    background-position: center;
+    position: relative;
+    z-index:2;
+    color:white
 }
+
+.loginImage{
+    width:100%;
+    height:100%;
+    background-image:linear-gradient(
+        to bottom,
+        rgba(0,0,0,.1),
+        rgba(0,0,0,0.3)
+    ),
+    url("https://images.pexels.com/photos/9783678/pexels-photo-9783678.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    background-size:cover;
+    background-position: center;
+    color:white;
+    -webkite-filter:blur(8px);
+    filter:blur(8px);
+    position:absolute;
+    top:0;
+    z-index:1
+}
+
 .loginTitle{
     font-size: 2rem;
     margin-bottom: 20px;
+    font-family: sans-serif;
 }
 .loginForm{
    display: flex; 
@@ -25,6 +41,8 @@
 }
 .loginForm > label{
     margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-family: sans-serif;
 }
 .loginFormInput{
     height:30px;
@@ -32,10 +50,12 @@
     margin-bottom: 20px;
     padding:10px;
     font-size: 1.1rem;
-    font-family: serif;
+    font-family: sans-serif;
 }
+
 .loginFormInput::-webkit-input-placeholder{
-    font-family: serif;
+    font-family: sans-serif;
+    font-size: 1rem;
 }
 .loginFormInput:focus{
     outline: none;
@@ -47,10 +67,11 @@
     color:white;
     font-size: 1rem;
     width:100%;
-    height: 40px;
+    height: 50px;
     margin-left: auto;
     margin-right: auto;
-    font-family: serif;
+    margin-top: 20px;
+    font-family: sans-serif;
     cursor: pointer;
 }
 .loginSubmit:disabled{
@@ -62,9 +83,9 @@
     background-color: white;
     margin-top: 20px;
     width:400px;
-    height:40px;
+    height:50px;
     font-size: 1rem;
-    font-family: serif;
+    font-family: sans-serif;
     cursor: pointer;
 }
 

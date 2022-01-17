@@ -11,7 +11,6 @@ function Login() {
     const { dispatch, isFetching } = useContext(userContext);
     const [err, setErr] = useState(false);
     const navigate = useNavigate();
-
     console.log(err);
     async function handleSubmit(e) {
         e.preventDefault();
@@ -32,37 +31,43 @@ function Login() {
     }
 
     return (
-        <div className='login'>
-            <span className='loginTitle'>Welcome back</span>
-            <form className='loginForm' onSubmit={handleSubmit}>
-                <label><b>Username</b></label>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Enter your username..."
-                    className='loginFormInput'
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <label><b>Password</b></label>
-                <input
-                    type="password"
-                    name='password'
-                    placeholder="Enter your password..."
-                    className='loginFormInput'
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button
-                    type='submit'
-                    className='loginSubmit'
-                    disabled={isFetching}>
-                    Login
-                </button>
-            </form>
-            <Link to="/register">
-                <button className='loginRegister'>Register</button>
-            </Link>
-            {err && <p style={{marginTop:"20px",color:"red"}}>User doesn't not exist</p>}
-        </div>
+        <>
+            <div className='login'>
+                <span className='loginTitle'>Welcome back</span>
+                <form className='loginForm' onSubmit={handleSubmit}>
+
+                    <label>Username</label>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your username..."
+                        className='loginFormInput'
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        name='password'
+                        placeholder="Enter your password..."
+                        className='loginFormInput'
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <button
+                        type='submit'
+                        className='loginSubmit'
+                        disabled={isFetching}>
+                        Login
+                    </button>
+                </form>
+                <Link to="/register">
+                    <button className='loginRegister'>Register</button>
+                </Link>
+                {err && <p style={{ marginTop: "20px", color: "red" }}>User doesn't not exist</p>}
+            </div>
+            <div className='loginImage'></div>
+        </>
     )
 }
 
