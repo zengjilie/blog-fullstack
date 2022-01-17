@@ -11,8 +11,6 @@
     border-radius:10px;
     object-fit: cover;
 }
-.writeForm{
-}
 
 .writeFormGroup{
     margin-top: 30px;
@@ -65,9 +63,48 @@
     cursor: pointer;
 }
 
+.writeCategory{
+    border:1px solid lightgray;
+    padding:10px;
+    width:200px;
+    height:20px; 
+    font-size:1.2rem;
+    font-family: serif;
+    border-radius: 10px;
+    outline:none;
+}
+.writeCategoryAdd{
+    margin-left: 20px;
+    width:70px;
+    height:40px;
+    background-color:rgb(238, 238, 238);
+    border-radius: 10px;
+    border:1px solid lightgray;
+    cursor: pointer;
+    font-family: serif;
+    font-size: 1.2rem;
+}
+.writeCategoryAdd:hover{
+    background-color: lightgray;
+}
 
-@media only screen and (max-width:650px){
-    .write{
-
-    }
+.catList {
+    margin-top: 40px;
+}
+.catList span{
+    margin-right: 20px;
+    font-family: serif;
+    font-size: 1.3rem;
+    color:gray;
+    position: relative;
+}
+.catList span::before{
+    content:'';
+    display:inline-block;
+    height:2px;
+    background-color:lightgray;
+    position:absolute;
+    bottom:-5px;
+    left:-3px;
+    width:calc(100% + 6px);
 }

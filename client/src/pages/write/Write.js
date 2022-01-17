@@ -9,15 +9,19 @@ function Write() {
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [file, setFile] = useState(null);
+    const [category, setCategory] = useState('');
+    const [categoryList, setCategoryList] = useState([]);
     const { user } = useContext(userContext);
     const navigate = useNavigate();
+    console.log(categoryList);
 
     async function handleSubmit(e) {
         e.preventDefault();
         const newPost = {
             title,
             desc,
-            username: user.username
+            username: user.username,
+            categories: categoryList
         }
         if (file) {
             const fd = new FormData();
@@ -34,6 +38,7 @@ function Write() {
         }
         try {
             const res = await axios.post(process.env.REACT_APP_API_URL + '/posts', newPost);
+            const res2 = await axios.post(process.env.REACT_APP_API_URL + '/categories', categoryList);
             navigate('/post/' + res.data._id);
         } catch (err) {
             console.log(err);
@@ -50,7 +55,7 @@ function Write() {
                 />
             </div>
 
-            <form action="" className="writeForm" onSubmit={handleSubmit}>
+            <form id='form1'  className="writeForm" onSubmit={handleSubmit}>
 
                 <div className='writeFormGroup'>
                     <label htmlFor="fileInput">
@@ -81,9 +86,37 @@ function Write() {
                         onChange={(e) => setDesc(e.target.value)}
                     ></textarea>
                 </div>
-
-                <button type="submit" className='writeSubmit'>Publish</button>
             </form>
+
+            <div className='writeCategoryGroup'>
+                <input
+                    type="text"
+                    className='writeCategory'
+                    onChange={(e) => { setCategory(e.target.value) }}
+                    placeholder='Categories...'
+                    value={category}
+                />
+                <button
+                    onClick={() => {
+                        setCategoryList([...categoryList, category]);
+                        setCategory('')
+                    }}
+                    className='writeCategoryAdd'
+                >
+                    Add
+                </button>
+                <div className='catList'>
+                    {categoryList.map((cat, index) => <span key={index}>{cat}</span>)}
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                className='writeSubmit'
+                form='form1'
+            >
+                Publish
+            </button>
         </div>
     )
 }

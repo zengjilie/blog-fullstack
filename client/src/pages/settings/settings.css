@@ -19,7 +19,7 @@
 .settingsUpdateTitle{
     font-size: 2rem;
 }
-.settingsDeleteTitle{
+.settingsDelete{
     font-size: 1rem;
     color: red;
     cursor: pointer;
@@ -28,7 +28,7 @@
     border-radius: 9999px;
     border: 1px solid red;
 } 
-.settingsDeleteTitle:hover, .settingsDeleteTitle:active{
+.settingsDelete:hover, .settingsDelete:active{
     color:white;
     background-color: red;
 }
@@ -75,7 +75,8 @@
     height: 30px;
     border:none;
     border-bottom: 1px solid lightgray;
-    
+    font-family: serif;
+   font-size: 1.2rem; 
 }
 .settingInput::-webkit-input-placeholder{
     font-family: serif;

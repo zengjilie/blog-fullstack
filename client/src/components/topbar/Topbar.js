@@ -32,7 +32,7 @@ function Topbar() {
                     </Link>
 
                     {user ?
-                        <Link className='topListItem link' to="/" onClick={()=>dispatch({type:'LOGIN_OUT'})}>
+                        <Link className='topListItem link' to="/" onClick={() => dispatch({ type: 'LOGIN_OUT' })}>
                             <li >LOGOUT</li>
                         </Link> :
                         <Link className='topListItem link' to="/login">
@@ -48,12 +48,12 @@ function Topbar() {
                     {user?.profilePic ?
                         <img
                             className="topImg"
-                            src={user.profilePic}
+                            src={process.env.REACT_APP_API_IMAGE + `/${user.profilePic}`}
                             alt="" /> :
                         <img
                             className="topImg"
                             src="/images/profile.jpeg"
-                            alt="" /> 
+                            alt="" />
                     }
                 </Link>
             </div>

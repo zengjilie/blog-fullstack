@@ -22,6 +22,9 @@ function Login() {
         } catch (err) {
             console.log(err);
             setErr(true);
+            setTimeout(() => {
+                setErr(false);
+            },2000);
         }
     }
 

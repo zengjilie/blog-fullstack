@@ -46,7 +46,6 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
     res.status(200).json('File has been uplaoded');
 })
 
-
 app.listen(PORT, () => {
     console.log('server is running')
     console.log(process.env.MONGO_URL)

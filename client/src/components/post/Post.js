@@ -2,9 +2,6 @@ import './post.css'
 import { Link } from 'react-router-dom';
 
 function Post({ post }) {
-    console.log(process.env.REACT_APP_API_IMAGE + `/${post?.photo}`)
-    fetch(process.env.REACT_APP_API_IMAGE + `/${post?.photo}`)
-        .then((res) => console.log(res))
     return (
         <div className='post'>
             <Link to={`/post/${post._id}`}>
@@ -26,7 +23,7 @@ function Post({ post }) {
 
                 <div className='postInfoLineOne'>
                     <Link className="postTitle" to={`/post/${post._id}`}>
-                        <span >
+                        <span>
                             {post?.title}
                         </span>
                     </Link>

@@ -33,7 +33,6 @@ function SinglePost() {
             } catch (err) {
                 console.log(err);
             }
-
         }
         fetchPost();
     }, [])
@@ -45,7 +44,7 @@ function SinglePost() {
     //delete post
     async function handleDelete() {
         try {
-            const res = await axios.delete(process.env.REACT_APP_API_URL + `/posts/${postId}`, { data: { username: user.username, photo: user.photo } });
+            const res = await axios.delete(process.env.REACT_APP_API_URL + `/posts/${postId}`, { data: { username: user.username, photo:post.photo } });
             navigate('/');
         } catch (err) {
             console.log(err);

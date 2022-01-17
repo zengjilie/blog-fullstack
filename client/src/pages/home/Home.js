@@ -12,11 +12,16 @@ function Home() {
     useEffect(() => {
         const fetch = async () => {
             //fetch all existing posts
-            const res = await axios.get(process.env.REACT_APP_API_URL + '/posts');
-            setPosts(res.data);
+            try {
+                const res = await axios.get(process.env.REACT_APP_API_URL + '/posts');
+                setPosts(res.data);
+            }catch(err){
+                console.log(err);
+            }
         }
         fetch();
     }, [])
+    console.log(posts);
     return (
         <div>
             <Header />

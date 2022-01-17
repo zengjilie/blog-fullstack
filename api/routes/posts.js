@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const res = require('express/lib/response');
+const { resume } = require('npmlog');
 const Post = require('../models/Post');
+const fs = require('fs');
 
 //create post
 router.post('/', async (req, res) => {
@@ -14,8 +16,7 @@ router.post('/', async (req, res) => {
     }
 
 });
-
-//update post
+//update a post
 router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -47,7 +48,12 @@ router.delete('/:id', async (req, res) => {
         } else {
             try {
                 const deletedPost = await Post.findByIdAndDelete(req.params.id);
-                fs.unlink()
+                try {
+                    //delete local file;
+                    fs.unlinkSync(`./images/${req.body.photo}`);
+                } catch (err) {
+                    console.log(err);
+                }
                 res.status(200).json('Post has been deleted');
             } catch (err) {
                 res.status(500).json(err);
@@ -58,39 +64,49 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-//get post
-router.get('/:id', async (req,res)=>{
-    try{
+//get a post
+router.get('/:id', async (req, res) => {
+    try {
         const post = await Post.findById(req.params.id);
-        if(!post){
+        if (!post) {
             res.status(404).json("Post doesn't exists!");
-        }else{
+        } else {
             res.status(200).json(post);
         }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
+//get all posts
+router.get('/', async (req,res)=>{
+    try{
+        const posts = await Post.find();
+        res.status(200).json(posts);
     }catch(err){
         res.status(500).json(err);
     }
 })
 
 //get all posts from a user or category
-router.get('/', async (req,res) => {
+router.get('/', async (req, res) => {
     const username = req.query.user;
     const catName = req.query.cat;
-    try{
+    try {
         let posts;
-        if(username){
-            posts = await Post.find({username:username});
-        }else if(catName){
+        if (username) {
+            posts = await Post.find({ username: username });
+        } else if (catName) {
             posts = await Post.find({
-                categories:{
-                    $in:[catName],
+                categories: {
+                    $in: [catName],
                 }
             });
-        }else{
+        } else {
             posts = await Post.find();
         }
         res.status(200).json(posts);
-    }catch(err){
+    } catch (err) {
         res.status(500).json(err);
     }
 })
