@@ -69,13 +69,17 @@
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
-
-.settingsForm > input{
+.settingInput{
     color:gray;
     margin:10px 0;
     height: 30px;
     border:none;
     border-bottom: 1px solid lightgray;
+    
+}
+.settingInput::-webkit-input-placeholder{
+    font-family: serif;
+    font-size:1rem;
 }
 .settingsForm > input:focus{
     outline:none;

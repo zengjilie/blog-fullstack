@@ -1,5 +1,12 @@
 import './settings.css'
+import { userContext } from '../../context/Context';
+import { useContext } from 'react';
 function Settings() {
+    const { user } = useContext(userContext);
+    console.log(user);
+
+    //delete user accout
+    
     return (
         <div className='settings'>
             <div className='settingsWrapper'>
@@ -11,11 +18,19 @@ function Settings() {
                 <form className='settingsForm'>
                     <label>Your Profile</label>
                     <div className="settingsProfile">
-                        <img
-                            className='settingsImg'
-                            src="https://images.pexels.com/photos/10013070/pexels-photo-10013070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                            alt=""
-                        />
+                        {
+                            user?.profilePic ?
+                                <img
+                                    className='settingsImg'
+                                    src={process.env.REACT_APP_API_URL + `/images/${user.profilePic}`}
+                                    alt=""
+                                />:
+                                <img
+                                    className='settingsImg'
+                                    src="images/profile.jpeg"
+                                    alt=""
+                                />
+                        }
 
                         <label className='settingsUploadImage' htmlFor="fileInput">
                             <span >Upload Image</span>
@@ -24,11 +39,11 @@ function Settings() {
                     </div>
 
                     <label>Username</label>
-                    <input type="text" placeholder='Alex' />
+                    <input type="text" placeholder='Username...' className='settingInput' />
                     <label>Email</label>
-                    <input type="text" placeholder='Email' />
+                    <input type="text" placeholder='Email...' className='settingInput'/>
                     <label>Password</label>
-                    <input type="text" placeholder='Password' />
+                    <input type="text" placeholder='Password...' className='settingInput'/>
 
                     <button className="settingsSubmit">Update</button>
                 </form>

@@ -3,8 +3,7 @@
 }
 
 .singlePostWrapper{
-    padding:20px;
-    padding-right:20px;
+    margin:20px;
 }
 
 .singlePostImg{
@@ -13,17 +12,46 @@
     border-radius: 5px;
     object-fit: cover;
 }
-.singlePostTitle{
+
+.singlePostLineOne{
     display: flex;
     justify-content: space-between;
     align-items: start;
     font-size: 2rem;
-    padding-top:20px;
-    padding-bottom:20px;
+    padding: 20px 0;
     font-family: 'Lora', serif;
+    border-radius: 8px;
 }
-.singlePostTitle > span{
-    flex:9
+.singlePostTitle{
+    flex:9;
+    width: 100%;
+    font-family: serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    outline:none;
+    border: none;
+    border-radius: 8px;
+    border-color:rgb(123, 123, 123);
+    padding:10px;
+}
+.singlePostUpdate{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:90px;
+    font-family: sans-serif;
+    padding:10px;
+    border:2px solid lightgray;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color:gray;
+    border-radius: 8px;
+    cursor: pointer;
+    width:100px;
+}
+.singlePostUpdate:hover{
+
+    background-color: rgb(230, 230, 230);
 }
 
 .singlePostAuthor{
@@ -43,7 +71,8 @@
 }
 
 .singlePostIcon{
-    font-size: 20px;
+    width: 30px;
+    height: 30px;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -66,8 +95,19 @@
 }
 .singlePostContent{
     font-size: 1rem;
+    width: 100%;
     color: #666;
     line-height: 25px;
+    font-family: serif;
+    outline:none;
+    border:none;
+    font-size:1.5rem;
+    border-radius: 8px;
+    border-color:gray;
+    padding:10px;
+    padding-bottom: 90px;
+
+    -webkit-box-sizing: border-box;
 }
 
 .singlePostContent::first-letter{

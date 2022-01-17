@@ -19,7 +19,7 @@ async function main() {
 //enable cors
 app.use(cors());
 //make images file public
-app.use('images',express.static(path.join(__dirname,'images')));
+app.use('/images',express.static(path.join(__dirname,'images')));
 
 app.use(express.json());
 //authentication

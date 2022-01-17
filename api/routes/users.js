@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/User');
 const Post = require('../models/User');
 const bcrypt = require('bcrypt');
+
 //update user info
 router.put('/:id', async (req, res) => {
     //userid must match endpoinst id

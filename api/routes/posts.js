@@ -47,6 +47,7 @@ router.delete('/:id', async (req, res) => {
         } else {
             try {
                 const deletedPost = await Post.findByIdAndDelete(req.params.id);
+                fs.unlink()
                 res.status(200).json('Post has been deleted');
             } catch (err) {
                 res.status(500).json(err);
