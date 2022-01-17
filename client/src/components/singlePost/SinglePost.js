@@ -104,7 +104,7 @@ function SinglePost() {
                 </h1>
 
                 <div className="singlePostInfo" >
-                    <Link to={`/user=${post?.username}`} className="link">
+                    <Link to={`/?user=${post?.username}`} className="link">
                         <span className="singlePostAuthor">
                             Author: <b>{post?.username}</b>
                         </span>

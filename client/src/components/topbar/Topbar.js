@@ -9,7 +9,7 @@ function Topbar() {
         <div className="top">
             <div className="topLeft">
                 <Link to="/" style={{ color: "black", textDecoration: "none" }}>
-                    <span className='topLogo'>BLOG-XYZ</span>
+                    <span className='topLogo'>BLOG / XYZ</span>
                 </Link>
             </div>
 
@@ -23,7 +23,7 @@ function Topbar() {
                         <li >HOME</li>
                     </Link>
 
-                    <Link className="topListItem link" to="/about" >
+                    <Link className="topListItem link" style={{textDecoration:"line-through"}} to="/about" >
                         <li >ABOUT</li>
                     </Link>
 

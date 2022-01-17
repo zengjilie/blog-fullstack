@@ -38,7 +38,7 @@ function Post({ post }) {
 
                 <p className="postDes">
                     {post?.desc}
-                </p>
+                    </p>
 
                 <span className="postDate">{new Date(post?.createdAt).toDateString()}</span>
             </div>

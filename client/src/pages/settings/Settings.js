@@ -39,6 +39,7 @@ function Settings() {
                 password,
                 email,
             };
+            //check if user upload image
             if (file) {
                 const fd = new FormData();
                 const filename = Date.now() + file.name;
@@ -53,11 +54,14 @@ function Settings() {
             }
             console.log(updatedUser);
             const res = await axios.put(process.env.REACT_APP_API_URL + `/users/${user._id}`, updatedUser);
+            console.log('updateduser', res.data);
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
             window.location.reload();
         } catch (err) {
             console.log(err);
         }
     }
+
     return (
         <div className='settings'>
             <div className='settingsWrapper'>

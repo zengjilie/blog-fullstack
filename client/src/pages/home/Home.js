@@ -4,32 +4,60 @@ import Posts from '../../components/posts/Posts'
 import Sidebar from '../../components/sidebar/Sidebar'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
     const [posts, setPosts] = useState([]);
-    console.log(posts);
+    const { search } = useLocation();
+    const sp = new URLSearchParams(search);
+
     useEffect(() => {
-        const fetch = async () => {
-            //fetch all existing posts
-            try {
-                const res = await axios.get(process.env.REACT_APP_API_URL + '/posts');
-                setPosts(res.data);
-            }catch(err){
-                console.log(err);
+        //query string user/cat/all
+        if (sp.has('user')) {
+            console.log('user', sp.get('user'));
+            const fetch = async () => {
+                try {
+                    const res = await axios.get(process.env.REACT_APP_API_URL + `/posts?user=${sp.get('user')}`);
+                    console.log(res);
+                    setPosts(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
             }
+            fetch();
+        } else if (sp.has('cat')) {
+            console.log('cat',sp.get('cat'));
+            const fetch = async () => {
+                try {
+                    const res = await axios.get(process.env.REACT_APP_API_URL + `/posts?cat=${sp.get('cat')}`);
+                    console.log(res);
+                    setPosts(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            fetch();
+        } else {
+            const fetch = async () => {
+                try {
+                    const res = await axios.get(process.env.REACT_APP_API_URL + '/posts');
+                    setPosts(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            fetch();
         }
-        fetch();
-    }, [])
-    console.log(posts);
+    }, [search])
+
     return (
-        <div>
+        <>
             <Header />
             <div className='home'>
                 <Posts posts={posts} />
                 <Sidebar />
             </div>
-        </div>
+        </>
     )
 }
 

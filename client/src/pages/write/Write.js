@@ -1,6 +1,6 @@
 import './write.css'
 import { PlusSmIcon } from '@heroicons/react/outline';
-import { useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { userContext } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
@@ -13,15 +13,16 @@ function Write() {
     const [categoryList, setCategoryList] = useState([]);
     const { user } = useContext(userContext);
     const navigate = useNavigate();
-    console.log(categoryList);
 
+    console.log(...categoryList.map((cat) => cat.name));
+    console.log(categoryList);
     async function handleSubmit(e) {
         e.preventDefault();
         const newPost = {
             title,
             desc,
             username: user.username,
-            categories: categoryList
+            categories: [...categoryList.map((cat) => cat.name)]
         }
         if (file) {
             const fd = new FormData();
@@ -38,12 +39,13 @@ function Write() {
         }
         try {
             const res = await axios.post(process.env.REACT_APP_API_URL + '/posts', newPost);
-            const res2 = await axios.post(process.env.REACT_APP_API_URL + '/categories', categoryList);
+            const res2 = await axios.post(process.env.REACT_APP_API_URL + '/categories', {data:[...categoryList]});
             navigate('/post/' + res.data._id);
         } catch (err) {
             console.log(err);
         }
     }
+
 
     return (
         <div className='write'>
@@ -55,7 +57,7 @@ function Write() {
                 />
             </div>
 
-            <form id='form1'  className="writeForm" onSubmit={handleSubmit}>
+            <form id='form1' className="writeForm" onSubmit={handleSubmit}>
 
                 <div className='writeFormGroup'>
                     <label htmlFor="fileInput">
@@ -98,7 +100,7 @@ function Write() {
                 />
                 <button
                     onClick={() => {
-                        setCategoryList([...categoryList, category]);
+                        setCategoryList([...categoryList, { name: category }]);
                         setCategory('')
                     }}
                     className='writeCategoryAdd'
@@ -106,7 +108,7 @@ function Write() {
                     Add
                 </button>
                 <div className='catList'>
-                    {categoryList.map((cat, index) => <span key={index}>{cat}</span>)}
+                    {categoryList.map((cat, index) => <span key={index}>{cat.name}</span>)}
                 </div>
             </div>
 

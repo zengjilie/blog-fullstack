@@ -9,7 +9,10 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { dispatch, isFetching } = useContext(userContext);
+    const [err, setErr] = useState(false);
     const navigate = useNavigate();
+
+    console.log(err);
     async function handleSubmit(e) {
         e.preventDefault();
         //manually dispatch, without importing actions, probably not the best way.
@@ -22,6 +25,7 @@ function Login() {
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
             navigate('/');
         } catch (err) {
+            err && setErr(true);
             console.log(err);
             dispatch({ type: 'LOGIN_FAILURE' });
         }
@@ -57,6 +61,7 @@ function Login() {
             <Link to="/register">
                 <button className='loginRegister'>Register</button>
             </Link>
+            {err && <p style={{marginTop:"20px",color:"red"}}>User doesn't not exist</p>}
         </div>
     )
 }

@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
     }
 
 });
+
 //update a post
 router.put('/:id', async (req, res) => {
     try {
@@ -78,28 +79,22 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-//get all posts
-router.get('/', async (req,res)=>{
-    try{
-        const posts = await Post.find();
-        res.status(200).json(posts);
-    }catch(err){
-        res.status(500).json(err);
-    }
-})
 
-//get all posts from a user or category
+//get posts from a user or category or all posts
 router.get('/', async (req, res) => {
-    const username = req.query.user;
-    const catName = req.query.cat;
+    const username = req.query?.user;
+    const catname = req.query?.cat;
+    console.log(username);
+    console.log(catname);
+
     try {
         let posts;
         if (username) {
             posts = await Post.find({ username: username });
-        } else if (catName) {
+        } else if (catname) {
             posts = await Post.find({
                 categories: {
-                    $in: [catName],
+                    $in: [catname],
                 }
             });
         } else {

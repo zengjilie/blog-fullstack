@@ -21,8 +21,8 @@ function Sidebar() {
                 <span className="sidebarTitle">CATEGORITES</span>
                 <ul className="sidebarList">
                     {categories.map((cat, index) =>
-                        <Link key={index} to={`/?cat=${cat.name}`} className='link'>
-                            <li className="sidebarListItem" >{cat.name}</li>
+                        <Link key={index} to={`/?cat=${cat?.name}`} className='link'>
+                            <li className="sidebarListItem" >{cat?.name}</li>
                         </Link>
                     )}
                 </ul>
