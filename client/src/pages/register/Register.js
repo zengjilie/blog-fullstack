@@ -10,7 +10,6 @@ export default function Register() {
     const [err, setErr] = useState(false);
     const navigate = useNavigate();
 
-    console.log(username, email, password);
     async function handleSubmit(e) {
         e.preventDefault();
         try {
@@ -19,7 +18,6 @@ export default function Register() {
                 email: email,
                 password: password,
             })
-            console.log(res);
             res.data && navigate('/login');
         } catch (err) {
             console.log(err);

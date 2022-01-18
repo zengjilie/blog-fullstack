@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { userContext } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
+import {TextareaAutosize} from "@mui/base";
 
 function Write() {
     const [title, setTitle] = useState('');
@@ -81,12 +82,19 @@ function Write() {
 
 
                 <div className="writeFormGroup">
-                    <textarea
+                    {/* <textarea
                         placeholder='Tell your story...'
                         type="text"
                         className='writeInput writeContent'
                         onChange={(e) => setDesc(e.target.value)}
-                    ></textarea>
+                    ></textarea> */}
+                    <TextareaAutosize
+                        type="text"
+                        aria-label="empty textarea" 
+                        placeholder="Tell your story..."
+                        className='writeInput writeContent'
+                        onChange={(e) => setDesc(e.target.value)}
+                    />
                 </div>
             </form>
 

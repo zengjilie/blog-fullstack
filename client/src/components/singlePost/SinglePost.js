@@ -8,6 +8,7 @@ import {
     PencilAltIcon,
 } from '@heroicons/react/outline';
 import { userContext } from '../../context/Context';
+import { TextareaAutosize } from "@mui/base";
 
 function SinglePost() {
     const [post, setPost] = useState(null);
@@ -44,7 +45,7 @@ function SinglePost() {
     //delete post
     async function handleDelete() {
         try {
-            const res = await axios.delete(process.env.REACT_APP_API_URL + `/posts/${postId}`, { data: { username: user.username, photo:post.photo } });
+            const res = await axios.delete(process.env.REACT_APP_API_URL + `/posts/${postId}`, { data: { username: user.username, photo: post.photo } });
             navigate('/');
         } catch (err) {
             console.log(err);
@@ -113,7 +114,18 @@ function SinglePost() {
                         {new Date(post?.createdAt).toDateString()}
                     </span>
                 </div>
-                <textarea
+                {/* <textarea
+                    type="text"
+                    className='singlePostContent'
+                    value={desc}
+                    readOnly={!updateMode}
+                    onChange={(e) => setDesc(e.target.value)}
+                    style={{
+                        border: updateMode && "2px solid lightgray"
+                    }}
+                /> */}
+                <TextareaAutosize
+                    aria-label="empty textarea"
                     type="text"
                     className='singlePostContent'
                     value={desc}

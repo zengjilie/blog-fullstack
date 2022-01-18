@@ -26,15 +26,22 @@ router.post('/register', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username });
-        !user && res.status(400).json("User doesn not exist");
+        if (req.body) {
+            const user = await User.findOne({ username: req.body.username });
+            console.log(user);
+            if (!user) {
+                return res.status(400).json("User doesn not exist");
+            }
+            const validate = await bcrypt.compare(req.body.password, user.password);
+            console.log(validate);
+            if (!validate) {
+                return res.status(400).json('wrong credentials');
+            }
 
-        const validate = await bcrypt.compare(req.body.password, user.password);
-        !validate && res.status(400).json('wrong credentials');
-
-        // send everything to user but password
-        const { password, ...others} = user._doc;
-        res.status(200).json(others);
+            // send everything to user but password
+            const { password, ...others } = user._doc;
+            res.status(200).json(others);
+        }
     } catch (err) {
         res.status(500).json(err);
     }

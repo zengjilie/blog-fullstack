@@ -51,16 +51,21 @@
 .writeContent{
     font-size: 1.5rem;
     font-family:serif;
+    margin: 20px 0 50px 0;
 }
 
 .writeSubmit{
     color:white;
+    font-size: 1rem;
     border:none;
     margin-top: 100px;  
     padding: 10px 20px ;
-    background-color: orange;
-    border-radius: 9999px;
+    background-color: rgb(255, 201, 102);
     cursor: pointer;
+    transition:background-color .3s
+}
+.writeSubmit:hover{
+    background-color: orange;
 }
 
 .writeCategory{
@@ -70,22 +75,21 @@
     height:20px; 
     font-size:1.2rem;
     font-family: serif;
-    border-radius: 10px;
     outline:none;
 }
 .writeCategoryAdd{
     margin-left: 20px;
     width:70px;
     height:40px;
-    background-color:rgb(238, 238, 238);
-    border-radius: 10px;
+    background-color: #fff;
     border:1px solid lightgray;
     cursor: pointer;
-    font-family: serif;
+    font-family: sans-serif;
     font-size: 1.2rem;
+    transition:background-color .3s;
 }
 .writeCategoryAdd:hover{
-    background-color: lightgray;
+    background-color: rgb(232, 232, 232);
 }
 
 .catList {

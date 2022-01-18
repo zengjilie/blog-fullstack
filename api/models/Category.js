@@ -6,7 +6,6 @@ const CategorySchema = new mongoose.Schema({
         required:true,
         unique:true,
         ordered:false,
-
     }
 }, { timestamps: true })
 

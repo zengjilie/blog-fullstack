@@ -17,6 +17,8 @@
 }
 
 .settingsUpdateTitle{
+    font-family: sans-serif;
+    font-weight: 600;
     font-size: 2rem;
 }
 .settingsDelete{
@@ -36,6 +38,7 @@
 .settingsForm{
     display: flex;
     flex-direction: column;
+    font-family: sans-serif;
 }
 
 .settingsProfile{
@@ -71,7 +74,7 @@
 }
 .settingInput{
     color:gray;
-    margin:10px 0;
+    margin:10px 0 40px 0;
     height: 30px;
     border:none;
     border-bottom: 1px solid lightgray;
@@ -79,7 +82,7 @@
    font-size: 1.2rem; 
 }
 .settingInput::-webkit-input-placeholder{
-    font-family: serif;
+    font-family: sans-serif;
     font-size:1rem;
 }
 .settingsForm > input:focus{
