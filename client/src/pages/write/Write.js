@@ -14,9 +14,6 @@ function Write() {
     const [categoryList, setCategoryList] = useState([]);
     const { user } = useContext(userContext);
     const navigate = useNavigate();
-
-    console.log(...categoryList.map((cat) => cat.name));
-    console.log(categoryList);
     async function handleSubmit(e) {
         e.preventDefault();
         const newPost = {
