@@ -22,7 +22,6 @@ function Settings() {
                 }
             });
             dispatch({ type: 'LOGIN_OUT' });
-            console.log(res);
             navigate('/settings');
         } catch (err) {
             console.log(err);
@@ -52,11 +51,9 @@ function Settings() {
                     console.log(err);
                 }
             }
-            console.log(updatedUser);
             const res = await axios.put(process.env.REACT_APP_API_URL + `/users/${user._id}`, updatedUser);
-            console.log('updateduser', res.data);
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-            window.location.reload();
+            navigate('/settings');
         } catch (err) {
             console.log(err);
         }
