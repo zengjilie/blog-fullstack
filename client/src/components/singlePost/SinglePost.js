@@ -61,7 +61,7 @@ function SinglePost() {
                 photo: user.photo,
             })
             setUpdateMode(!updateMode);
-            window.location.reload();
+            navigate('/post/' + res.data._id);
         } catch (err) {
             console.log(err);
         }

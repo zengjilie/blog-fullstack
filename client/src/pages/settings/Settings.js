@@ -2,16 +2,16 @@ import './settings.css'
 import { userContext } from '../../context/Context';
 import { useContext, useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function Settings() {
     const { user, dispatch } = useContext(userContext);
-    console.log(user);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [file, setFile] = useState('');
 
-    console.log(file);
+    const navigate = useNavigate();
     //delete user accout
     async function handleDelete() {
         try {
@@ -23,7 +23,7 @@ function Settings() {
             });
             dispatch({ type: 'LOGIN_OUT' });
             console.log(res);
-            window.location.reload();
+            navigate('/settings');
         } catch (err) {
             console.log(err);
         }
