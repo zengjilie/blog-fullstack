@@ -1,4 +1,4 @@
-# BlOG / XYZ - fullstack project
+# BLOG / XYZ - fullstack project
 
 ### [Demon Stie](https://blogfullstack.netlify.app/)
 
