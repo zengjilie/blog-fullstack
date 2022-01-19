@@ -8,7 +8,7 @@ const postRoute = require('./routes/posts');
 const categoriesRoute = require('./routes/categories');
 const multer = require('multer');
 var cors = require('cors');
-const path = require('path');
+const { getFileStream } = require('./s3');
 
 var PORT = process.env.PORT || 5000;
 //connect to mongodb
@@ -18,12 +18,10 @@ async function main() {
 }
 //enable cors
 var corsOptions = {
-    orgin:'http://localhost:3000',
-    optionsSucessStatus:200,
+    orgin: 'http://localhost:3000',
+    optionsSucessStatus: 200,
 }
 app.use(cors());
-//make images file public
-app.use('/images',express.static(path.join(__dirname,'images')));
 
 app.use(express.json());
 //authentication
@@ -35,21 +33,16 @@ app.use('/api/posts', postRoute);
 //categories
 app.use('/api/categories', categoriesRoute);
 
-//greeting page
-app.get('/', (req,res)=>res.status(200).send('Hello World'))
-//image upload
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'images')
-    },
-    filename: function (req, file, cb) {
-        cb(null, req.body.name)
+//GREETING PAGE
+app.get('/', (req, res) => res.status(200).send('Hello World'))
+
+app.get('/images/:id', (req, res) => {
+    try {
+        const readStream = getFileStream(req.params.id);
+        readStream.pipe(res);
+    } catch (err) {
+        res.status(500).json(err);
     }
-})
-const upload = multer({ storage: storage });
-app.post('/api/upload', upload.single('file'), (req, res) => {
-    console.log(req.file);
-    res.status(200).json('File has been uplaoded');
 })
 
 app.listen(PORT, () => {

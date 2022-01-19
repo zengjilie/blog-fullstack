@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { userContext } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
-import {TextareaAutosize} from "@mui/base";
+import { TextareaAutosize } from "@mui/base";
 
 function Write() {
     const [title, setTitle] = useState('');
@@ -14,34 +14,25 @@ function Write() {
     const [categoryList, setCategoryList] = useState([]);
     const { user } = useContext(userContext);
     const navigate = useNavigate();
+
     async function handleSubmit(e) {
         e.preventDefault();
-        const newPost = {
-            title,
-            desc,
-            username: user.username,
-            categories: [...categoryList.map((cat) => cat.name)]
-        }
-        if (file) {
-            const fd = new FormData();
-            const filename = Date.now() + file.name;
-            fd.append('name', filename);
-            fd.append('file', file)
-            newPost.photo = filename;
-            try {
-                const res = await axios.post(process.env.REACT_APP_API_URL + '/upload', fd);
-            } catch (err) {
-                console.log(err);
-            }
-            console.log(URL.createObjectURL(file));
-        }
+        const fd = new FormData();
+        const filename = Date.now() + file.name;
+        fd.append('name', filename);
+        fd.append('file', file);
+        fd.append('title', title);
+        fd.append('desc', desc);
+        fd.append('username', user.username);
+        fd.append('categories', categoryList.map((cat)=>cat.name));
         try {
-            const res = await axios.post(process.env.REACT_APP_API_URL + '/posts', newPost);
-            const res2 = await axios.post(process.env.REACT_APP_API_URL + '/categories', {data:[...categoryList]});
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/posts', fd);
+            const res2 = await axios.post(process.env.REACT_APP_API_URL + '/categories', categoryList);
             navigate('/post/' + res.data._id);
         } catch (err) {
             console.log(err);
         }
+        console.log(URL.createObjectURL(file));
     }
 
 
@@ -56,7 +47,6 @@ function Write() {
             </div>
 
             <form id='form1' className="writeForm" onSubmit={handleSubmit}>
-
                 <div className='writeFormGroup'>
                     <label htmlFor="fileInput">
                         <PlusSmIcon className='writeIcon' />
@@ -79,15 +69,9 @@ function Write() {
 
 
                 <div className="writeFormGroup">
-                    {/* <textarea
-                        placeholder='Tell your story...'
-                        type="text"
-                        className='writeInput writeContent'
-                        onChange={(e) => setDesc(e.target.value)}
-                    ></textarea> */}
                     <TextareaAutosize
                         type="text"
-                        aria-label="empty textarea" 
+                        aria-label="empty textarea"
                         placeholder="Tell your story..."
                         className='writeInput writeContent'
                         onChange={(e) => setDesc(e.target.value)}

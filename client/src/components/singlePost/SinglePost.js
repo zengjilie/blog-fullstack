@@ -14,6 +14,7 @@ function SinglePost() {
     const [post, setPost] = useState(null);
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
+    const [photoId, setPhotoId] = useState('');
     const [updateMode, setUpdateMode] = useState(false);
 
     //fetch username
@@ -31,6 +32,7 @@ function SinglePost() {
                 setPost(res.data);
                 setTitle(res.data.title);
                 setDesc(res.data.desc);
+                setPhotoId(res.data.photo);
             } catch (err) {
                 console.log(err);
             }
@@ -58,7 +60,6 @@ function SinglePost() {
                 username: user.username,
                 title,
                 desc,
-                photo: user.photo,
             })
             setUpdateMode(!updateMode);
             navigate('/post/' + res.data._id);
@@ -74,7 +75,7 @@ function SinglePost() {
                 {post?.photo ?
                     <img
                         className='singlePostImg'
-                        src={process.env.REACT_APP_API_IMAGE + `/${post?.photo}`}
+                        src={process.env.REACT_APP_API_IMAGE + `/${photoId}`}
                         alt=""
                     /> :
                     <img
@@ -114,16 +115,6 @@ function SinglePost() {
                         {new Date(post?.createdAt).toDateString()}
                     </span>
                 </div>
-                {/* <textarea
-                    type="text"
-                    className='singlePostContent'
-                    value={desc}
-                    readOnly={!updateMode}
-                    onChange={(e) => setDesc(e.target.value)}
-                    style={{
-                        border: updateMode && "2px solid lightgray"
-                    }}
-                /> */}
                 <TextareaAutosize
                     aria-label="empty textarea"
                     type="text"
@@ -135,8 +126,7 @@ function SinglePost() {
                         border: updateMode && "2px solid lightgray"
                     }}
                 />
-                {updateMode && <div className='singlePostUpdate' onClick={handleUpdate}>Update</div>
-                }
+                {updateMode && <div className='singlePostUpdate' onClick={handleUpdate}>Update</div>}
             </div >
         </div >
     )

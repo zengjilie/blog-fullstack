@@ -1,11 +1,14 @@
 const router = require('express').Router();
 const res = require('express/lib/response');
-const { resume } = require('npmlog');
 const Post = require('../models/Post');
-const fs = require('fs');
+const multer = require('multer');
+const { uploadFile} = require('../s3');
 
-//create post
-router.post('/', async (req, res) => {
+//CREATE POST
+const upload = multer({ dest: 'images/' });
+router.post('/', upload.single('file'), async (req, res) => {
+    const result = await uploadFile(req.file);
+    req.body.photo = result.key;
     const newPost = new Post(req.body);
 
     try {
@@ -17,7 +20,7 @@ router.post('/', async (req, res) => {
 
 });
 
-//update a post
+//UPDATE POST
 router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -40,7 +43,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//delete post
+//DELETE POST
 router.delete('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -50,8 +53,6 @@ router.delete('/:id', async (req, res) => {
             try {
                 const deletedPost = await Post.findByIdAndDelete(req.params.id);
                 try {
-                    //delete local file;
-                    fs.unlinkSync(`./images/${req.body.photo}`);
                 } catch (err) {
                     console.log(err);
                 }
@@ -65,13 +66,14 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-//get a post
+//GET POST
 router.get('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (!post) {
             res.status(404).json("Post doesn't exists!");
         } else {
+            console.log(post);
             res.status(200).json(post);
         }
     } catch (err) {
@@ -80,7 +82,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
-//get posts from a user or category or all posts
+//GATE / USER
 router.get('/', async (req, res) => {
     const username = req.query?.user;
     const catname = req.query?.cat;

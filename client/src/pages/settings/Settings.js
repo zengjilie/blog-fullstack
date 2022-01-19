@@ -2,7 +2,7 @@ import './settings.css'
 import { userContext } from '../../context/Context';
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Settings() {
     const { user, dispatch } = useContext(userContext);
@@ -12,7 +12,7 @@ function Settings() {
     const [file, setFile] = useState('');
 
     const navigate = useNavigate();
-    //delete user accout
+    //DELETE USER
     async function handleDelete() {
         try {
             const res = await axios.delete(process.env.REACT_APP_API_URL + `/users/${user._id}`, {
@@ -28,32 +28,23 @@ function Settings() {
         }
     }
 
-    //update user info
+    //UPDATE USER
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const updatedUser = {
-                userId: user._id,
-                username: username,
-                password,
-                email,
-            };
-            //check if user upload image
-            if (file) {
-                const fd = new FormData();
-                const filename = Date.now() + file.name;
-                fd.append('name', filename);
-                fd.append('file', file);
-                try {
-                    const res = await axios.post(process.env.REACT_APP_API_URL + `/upload`, fd);
-                    updatedUser.profilePic = filename;
-                } catch (err) {
-                    console.log(err);
-                }
+            const fd = new FormData();
+            fd.append('userId', user._id);
+            fd.append('username', username);
+            fd.append('password', password);
+            fd.append('email', email);
+            fd.append('file', file);
+            try {
+                const res = await axios.put(process.env.REACT_APP_API_URL + `/users/${user._id}`, fd);
+                dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+                navigate('/settings');
+            } catch (err) {
+                console.log(err);
             }
-            const res = await axios.put(process.env.REACT_APP_API_URL + `/users/${user._id}`, updatedUser);
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
-            navigate('/settings');
         } catch (err) {
             console.log(err);
         }
@@ -74,20 +65,15 @@ function Settings() {
                 <form className='settingsForm' onSubmit={handleSubmit}>
                     <label>Your Profile</label>
                     <div className="settingsProfile">
-                        {
-                            user?.profilePic ?
-                                <img
-                                    className='settingsImg'
-                                    src={process.env.REACT_APP_API_IMAGE + `/${user.profilePic}`}
-                                    alt=""
-                                /> :
-                                <img
-                                    className='settingsImg'
-                                    src="images/profile.jpeg"
-                                    alt=""
-                                />
-                        }
-
+                        <img
+                            className='settingsImg'
+                            alt=""
+                            src={
+                                user?.profilePic ?
+                                    process.env.REACT_APP_API_IMAGE + `/${user.profilePic}` :
+                                    file && URL.createObjectURL(file) 
+                            }
+                        />
                         <label className='settingsUploadImage' htmlFor="fileInput">
                             <span >Upload Image</span>
                         </label>

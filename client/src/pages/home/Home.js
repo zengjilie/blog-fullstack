@@ -14,11 +14,9 @@ function Home() {
     useEffect(() => {
         //query string user/cat/all
         if (sp.has('user')) {
-            console.log('user', sp.get('user'));
             const fetch = async () => {
                 try {
                     const res = await axios.get(process.env.REACT_APP_API_URL + `/posts?user=${sp.get('user')}`);
-                    console.log(res);
                     setPosts(res.data);
                 } catch (err) {
                     console.log(err);
@@ -30,7 +28,6 @@ function Home() {
             const fetch = async () => {
                 try {
                     const res = await axios.get(process.env.REACT_APP_API_URL + `/posts?cat=${sp.get('cat')}`);
-                    console.log(res);
                     setPosts(res.data);
                 } catch (err) {
                     console.log(err);

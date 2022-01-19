@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MenuIcon } from '@heroicons/react/solid';
 import { useContext } from 'react';
 import { userContext } from '../../context/Context';
+
 function Topbar() {
     const { user, dispatch } = useContext(userContext);
     return (
@@ -52,7 +53,7 @@ function Topbar() {
                             alt="" /> :
                         <img
                             className="topImg"
-                            src="/images/profile.jpeg"
+                            src="./images/profile.jpeg"
                             alt="" />
                     }
                 </Link>

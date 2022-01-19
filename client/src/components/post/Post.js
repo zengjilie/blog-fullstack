@@ -2,6 +2,7 @@ import './post.css'
 import { Link } from 'react-router-dom';
 
 function Post({ post }) {
+    console.log(post);
     return (
         <div className='post'>
             <Link to={`/post/${post._id}`}>

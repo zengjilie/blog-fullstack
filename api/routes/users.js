@@ -2,20 +2,23 @@ const router = require('express').Router();
 const User = require('../models/User');
 const Post = require('../models/User');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const { uploadFile } = require('../s3');
 
-//update user info
-router.put('/:id', async (req, res) => {
-    //userid must match endpoinst id
+//UPDATE USER INFO
+const upload = multer({ dest: 'images/' });
+router.put('/:id', upload.single('file'), async (req, res) => {
     if (req.body.userId === req.params.id) {
-        if (req.body.password) {
+        if (req?.body?.password) {
+            //ENCRYPTION
             const salt = await bcrypt.genSalt(10);
             req.body.password = await bcrypt.hash(req.body.password, salt);
-        } else {
-            res.status(401).json('Please provide your password');
         }
-
         try {
-            const updatedUser = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+            const result = await uploadFile(req?.file);
+            req.body.profilePic = result.key;
+            console.log(req.body);
+            const updatedUser = await User.findByIdAndUpdate(req.params.id, {$set:req.body}, { new: true });
             res.status(200).json(updatedUser);
         } catch (err) {
             res.status(500).json(err);
@@ -25,14 +28,14 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//delete uesr account and all posts
+//DELETE USER
 router.delete('/:id', async (req, res) => {
     //userid must match endpoinst id
     if (req.body.userId === req.params.id) {
         try {
             const user = await User.findById(req.params.id);
             try {
-                await Post.deleteMany({username:req.body.username});
+                await Post.deleteMany({ username: req.body.username });
                 await User.findByIdAndDelete(req.params.id);
                 res.status(200).json('User has been deleted');
             } catch (err) {
@@ -46,13 +49,13 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-//get user
-router.get('/:id', async (req,res)=>{
-    try{
+//GET USER
+router.get('/:id', async (req, res) => {
+    try {
         const user = await User.findById(req.params.id);
-        const {password, ...others} = user._doc;
+        const { password, ...others } = user._doc;
         res.status(200).json(others);
-    }catch(err){
+    } catch (err) {
         res.status(500).json(err);
     }
 })
