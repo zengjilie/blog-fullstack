@@ -1,6 +1,6 @@
 # BLOG / XYZ - fullstack project
 
-### [Demo Stie](https://blogfullstack.netlify.app/)
+### [Demo Site](https://blogfullstack.netlify.app/)
 
 ## Tech Stack
 **Front-End** - React.js, CSS, HTML
